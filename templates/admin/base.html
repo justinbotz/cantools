@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}YOUR WEB TITLE{%  endblock %}
+
+{% block branding %}
+<h1 id="site-name">Your Site Name</h1>
+{% endblock %}
+{% block extrahead %}
+    <style type="text/css">
+        #header #branding h1{
+                background: None;  // here you remove the django image
+
+        }
+    </style>
+{% endblock %}
+</body>
+</html>

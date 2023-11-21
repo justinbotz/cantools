@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ asset.name }}</h1>
+  <p>{{ asset.description }}</p>
+  <!-- Display other fields of the asset as needed -->
+  {% if asset.image %}
+    <img src="{{ asset.image.url }}" alt="{{ asset.name }}">
+  {% endif %}
+{% endblock %}

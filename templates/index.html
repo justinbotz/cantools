@@ -1,0 +1,16 @@
+{% extends "base.html" %}  <!-- Extend your base template if you have one -->
+
+{% block content %}
+    <h1> Welcome to the library</h1>
+    {% if libraries.libraryProfile %}
+    <ul>
+    {% for Assets in Inventory %}
+
+        <li>
+        {{ Assets.name }}: {{Assets.image}}
+        </li>
+
+    {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

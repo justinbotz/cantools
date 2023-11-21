@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>All Libraries</h2>
+  <ul>
+{% for library in libraries %}
+  <li>
+    <a href="{% url 'library_detail' library.id %}">{{ library.name }}</a>
+    {% if request.user.is_authenticated %}
+      {% if request.user in library.followers.all %}
+        <a href="{% url 'unfollow_library' library.id %}">Unfollow</a>
+      {% else %}
+        <a href="{% url 'follow_library' library.id %}">Follow</a>
+      {% endif %}
+    {% endif %}
+  </li>
+{% endfor %}
+  </ul>
+
+      <!-- Pagination Controls -->
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock %}

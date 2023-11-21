@@ -1,0 +1,10 @@
+{% extends "base.html" %}  <!-- Extend your base template if you have one -->
+
+{% block content %}
+    <h2>Create Library</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}  <!-- CSRF token for form security -->
+        {{ form.as_p }}  <!-- Render form fields here -->
+        <button type="submit">Save changes</button>
+    </form>
+{% endblock %}
