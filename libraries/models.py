@@ -1,27 +1,28 @@
 from django.db import models
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 
 from django.db.models.signals import post_save
 class LibraryProfile(models.Model):
     # Basic Library Information
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     followers = models.ManyToManyField(User, related_name='followed_libraries', blank=True)
 
     # Images
-    profile_picture = models.ImageField(upload_to='library_profiles/')
-    header_image = models.ImageField(upload_to='library_profiles/')
+    profile_picture = models.ImageField(upload_to='library_profiles/',blank=True)
+    header_image = models.ImageField(upload_to='library_profiles/',blank=True)
 
     # Address Information
-    street_address = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=20)
+    street_address = models.CharField(max_length=255,blank=True)
+    city = models.CharField(max_length=100,blank=True)
+    state = models.CharField(max_length=100,blank=True)
+    zip_code = models.CharField(max_length=20,blank=True)
 
     # FAQs and Contact
-    faqs = models.TextField(help_text="Frequently Asked Questions")
-    contact = models.TextField(help_text="Contact Information")
+    faqs = models.TextField(help_text="Frequently Asked Questions",blank=True)
+    contact = models.TextField(help_text="Contact Information",blank=True)
 
     # Additional fields
     opening_hours = models.CharField(max_length=255, blank=True)
@@ -44,3 +45,10 @@ class LibraryProfile(models.Model):
     def __str__(self):
         return self.name
 
+class LibraryVisit(models.Model):
+    library = models.ForeignKey(LibraryProfile, on_delete=models.CASCADE, related_name="visits")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    visit_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} visited {self.library.name} on {self.visit_date}"

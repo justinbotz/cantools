@@ -8,17 +8,30 @@
 <!--users/templates/registration/login.html-->
 
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h2>Login</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Login">
-</form>
+  <div class="row justify-content-center">
+    <div class="col-4"> <img src="/media/liblogo2.png" class="rounded mx-auto d-block" alt="Tool Library" >
+                               {% load crispy_forms_tags %}
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+{#                                <img class="mb-4" src="media/liblogo.png" alt="" width="200" height="200">#}
+                                <h1> </h1>
+                                 <h2 class="h3 mb-3 fw-normal"> Hello, {{ user.username|default:'Guest' }}! Sign In</h2>
 
-<a href="{% url 'dashboard' %}">Back to dashboard</a>
+                                            <form method="post">
+                                             {% csrf_token %}
+                                             {{ form|crispy }}
+                                             <input class="btn btn-dark"  type="submit" value="Login">
+{#         <a href="{% url 'dashboard' %}">Back to dashboard</a>#}
+                                            </form>
+          </div>
+    </div>
+
+
+
 {% endblock %}
 </body>
 </html>
+

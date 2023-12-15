@@ -1,0 +1,280 @@
+{% extends "base.html" %}  <!-- Extend your base template if you have one -->
+
+{% block content %}
+
+{#    TOP ROW OF CONTENT AND IMPORTANT NUMBERS#}
+          <div class="content">
+        <div class="row gy-3 mb-4 justify-content-between">
+          <div class="col-xxl-6">
+            <h2 class="mb-2 text-1100">{{ library.name}} Dashboard</h2>
+            <h5 class="text-700 fw-semi-bold mb-4">Check your library metrics in one place</h5>
+            <div class="row g-3 mb-3">
+              <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex d-sm-block justify-content-between">
+                      <div class="border-bottom-sm mb-sm-4">
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center icon-wrapper-sm shadow-primary-100" style="transform: rotate(-7.45deg);"><span class="fa-solid fa-phone-alt text-primary fs-1 z-index-1 ms-2"></span></div>
+                          <p class="text-700 fs--1 mb-0 ms-2 mt-3">Library Members</p>
+                        </div>
+                        <p class="text-primary mt-2 fs-2 fw-bold mb-0 mb-sm-4">3 <span class="fs-0 text-900 lh-lg">Members</span></p>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center flex-between-end d-sm-block text-end text-sm-start"><span class="badge badge-phoenix badge-phoenix-success fs--2 mb-2">+24.5%</span>
+                        <p class="mb-0 fs--1 text-700">Than Yesterday</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex d-sm-block justify-content-between">
+                      <div class="border-bottom-sm mb-sm-4">
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center icon-wrapper-sm shadow-info-100" style="transform: rotate(-7.45deg);"><span class="fa-solid fa-calendar text-info fs-1 z-index-1 ms-2"></span></div>
+                          <p class="text-700 fs--1 mb-0 ms-2 mt-3">Total Library Assets</p>
+                        </div>
+                        <p class="text-info mt-2 fs-2 fw-bold mb-0 mb-sm-4">12 <span class="fs-0 text-900 lh-lg">This Week</span></p>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center flex-between-end d-sm-block text-end text-sm-start"><span class="badge badge-phoenix badge-phoenix-warning fs--2 mb-2">+24.5%</span>
+                        <p class="mb-0 fs--1 text-700">Than last week</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-xl-6 col-xxl-4 gy-5 gy-md-3">
+                <div class="border-bottom">
+                  <h5 class="pb-4 border-bottom">Most Requested Resources</h5>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-transparent list-group-crm fw-bold text-900 fs--1 py-2">
+                      <div class="d-flex justify-content-between"><span class="fw-normal fs--1 mx-1"> <span class="fw-bold">1. </span>None </span><span>(65)</span></div>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+{#LIST OF USERS,MEMBERS AND FOLLOW REQUESTS           #}
+            <h4 class="mt-4 mb-3">User Info </h4>
+
+            <div class="border-top border-bottom-0 border-300" id="dealForecastTable" data-list='{"valueNames":["contact","appointment","qualified","closed-won","contact-sent"],"page":5}'>
+              <div class="table-responsive scrollbar">
+                <table class="table fs--1 mb-0">
+                  <thead>
+                    <tr>
+                      <th class="sort border-end white-space-nowrap align-middle ps-0 text-uppercase text-700" scope="col" data-sort="contact" style="width:15%; min-width:100px">First Name</th>
+                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="appointment" style="width:15%; min-width:95px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-primary me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Last Name</span></div>
+                      </th>
+                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="qualified" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-primary-300 me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Email</span></div>
+                      </th>
+                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="closed-won" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-success me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Status</span></div>
+                      </th>
+                      <th class="sort align-middle text-end ps-3 text-uppercase text-700" scope="col" data-sort="contact-sent" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-info me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Checked Out:
+
+                        </span></div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="list" id="table-deal-forecast-body">
+                                {% for follower in follower_details %}
+                                <tr>
+                                    <td>{{ follower.first_name }}</td>
+                                    <td>{{ follower.last_name }}</td>
+                                    <td>{{ follower.email }}</td>
+                                    <td>{{ follower.status }}</td>
+                                    <td>{{ follower.member_since|date:"Y-m-d" }}</td>
+                                    <td>{{ follower.checked_out_assets|join:", " }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6">No followers found.</td>
+                                </tr>
+                                {% endfor %}
+                         </tbody>
+                        </span></div>
+                      </th>
+                    </tr>
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+{#    map stuff #}
+        <div class="mx-lg-n4">
+          <div class="row g-3 mb-9 mt-n7">
+            <div class="col-xl-5">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3>Library Map</h3>
+                  <p class="text-700 mb-0">location of Library and Users &amp; conversion</p>
+
+                    <div id="mapid" style="height: 400px;"></div>
+                        <script>
+                             var map = L.map('mapid').setView([41.8781, -87.6298], 13); // Coordinates for Chicago
+
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                             attribution: '© OpenStreetMap contributors'
+                              }).addTo(map);
+
+                              // Add more map features like markers, popups, etc., as needed
+
+                                 var marker = L.marker([41.8781, -87.6298]).addTo(map); // Example marker at Chicago
+                             marker.bindPopup("<b>Chicago Library</b>").openPopup();
+                            </script>
+                </div>
+              </div>
+            </div>
+
+              {#    users who joined the library#}
+            <div class="col-xl-7">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3>New Users</h3>
+                  <p class="text-700">Chart.js example showing Number of users joined per month</p>
+                  <div>
+                        <canvas id="userJoinChart">
+                            <script>
+                        var ctx = document.getElementById('userJoinChart').getContext('2d');
+                        var chartData = {{ chart_data|safe }};
+                        var userJoinChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: chartData.labels,
+                                datasets: [{
+                                    label: 'Number of Users Joined per Month',
+                                    data: chartData.data,
+                                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                                    borderColor: 'rgba(0, 123, 255, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script></canvas>
+
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+{#RESOURCES ADD TO THE LIBRARY THIS MONTH#}
+            <div class="col-xl-7">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3>Resources added per month</h3>
+                  <p class="text-700">Keep track of new Resources added to the library by month</p>
+                  <div>
+                        <canvas id="NewAssetChart">
+                            <script>
+                        var ctx = document.getElementById('NewAssetChart').getContext('2d');
+                        var NewAssetChart = {{ asset_chart_data|safe }};
+                        var NewAssetChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: chartData.labels,
+                                datasets: [{
+                                    label: 'Number of Assets Added per Month',
+                                    data: chartData.data,
+                                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                                    borderColor: 'rgba(0, 123, 255, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script></canvas>
+
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{#ASSET MANAGEMENT TABLE#}
+
+            <h4 class="mt-4 mb-3">ASSET MANAGEMENT TABLE</h4>
+            <div class="border-top border-bottom-0 border-300" id="dealForecastTable" data-list='{"valueNames":["contact","appointment","qualified","closed-won","contact-sent"],"page":5}'>
+              <div class="table-responsive scrollbar">
+                <table class="table fs--1 mb-0">
+                  <thead>
+                    <tr>
+                      <th class="sort border-end white-space-nowrap align-middle ps-0 text-uppercase text-700" scope="col" data-sort="contact" style="width:15%; min-width:100px">Name</th>
+                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="appointment" style="width:15%; min-width:95px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-primary me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Description</span></div>
+                      </th>
+                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="qualified" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-primary-300 me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Availability</span></div>
+                      </th>
+                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="closed-won" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-success me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Checked Out By:</span></div>
+                      </th>
+                      <th class="sort align-middle text-end ps-3 text-uppercase text-700" scope="col" data-sort="contact-sent" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-info me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Number of Times Checked Out</span></div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="list" id="table-deal-forecast-body">
+                  {% for asset in page_obj %}
+                    <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                      <td class="contact border-end align-middle white-space-nowrap py-2 ps-0 px-3"><a class="fw-semi-bold" href="#!">{{ asset.Name}}</a></td>
+                      <td class="appointment border-end align-middle white-space-nowrap text-end fw-semi-bold text-900 py-2 px-3">{{ asset.description }}</td>
+                      <td class="qualified border-end align-middle white-space-nowrap text-end fw-semi-bold text-900 py-2 px-3">
+                          {% if asset.checkedout %} <a href="" class= "btn btn-danger disabled">Checked Out</a>
+                            {% elif request.user.is_authenticated and request.user in asset.requested_by.all %}</td>
+
+                                    <form action="{% url 'toggle_request_asset' asset.id library.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-warning">Remove from Cart</button>
+                                    </form>
+                                {% else %}
+                                    <form action="{% url 'toggle_request_asset' asset.id library.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-info">Request Item</button>
+                                    </form>
+
+                            {% endif %}
+                        <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="closed-won" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-success me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">{{ asset.checked_out_by }}:</span></div>
+                      </th>
+                      <th class="sort align-middle text-end ps-3 text-uppercase text-700" scope="col" data-sort="contact-sent" style="width:20%; min-width:100px">
+                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-info me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">{{ AssetRequest}}</span></div>
+                      </th>
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+{% endblock %}

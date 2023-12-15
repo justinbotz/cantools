@@ -1,10 +1,15 @@
 {% extends "base.html" %}  <!-- Extend your base template if you have one -->
 
 {% block content %}
+    {% load crispy_forms_tags %}
+
+    <div class="mx-auto p-2" style="width: 400px;">
     <h2>Edit Profile</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}  <!-- CSRF token for form security -->
-        {{ form.as_p }}  <!-- Render form fields here -->
+{#        {{ form.as_p }}#}
+        {{ form|crispy }}<!-- Render form fields here -->
         <button type="submit">Save changes</button>
     </form>
+    </div>
 {% endblock %}

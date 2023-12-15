@@ -8,15 +8,307 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Hello, {{ user.username|default:'Guest' }}!
 
-    <div>
-    {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
-</div>
+
+ {% if user.is_authenticated %}
+
+            {#    TOP ROW OF CONTENT AND IMPORTANT NUMBERS#}
+          <div class="content">
+        <div class="row gy-3 mb-4 justify-content-between">
+          <div class="col-xxl-6">
+            <h2 class="mb-2 text-1100">{{user.first_name}}'s Dashboard</h2>
+            <div class="row g-3 mb-3">
+              <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-4">
+                <div class="card h-55">
+                  <div class="card-body">
+                    <div class="d-flex d-sm-block justify-content-between">
+                      <div class="border-bottom-sm mb-sm-4">
+                          <div class="d-flex align-items-center"></div>
+{#create new Library#}
+
+                       <a href="{% url 'new_library' %}" <button type="button" class="btn btn-outline-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-building-fill-add" viewBox="0 0 16 16">
+                              <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
+                              <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7.256A4.493 4.493 0 0 0 12.5 8a4.493 4.493 0 0 0-3.59 1.787A.498.498 0 0 0 9 9.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .39-.187A4.476 4.476 0 0 0 8.027 12H6.5a.5.5 0 0 0-.5.5V16H3a1 1 0 0 1-1-1zm2 1.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3 0v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                            </svg>
+                            <h4>Create New Library</h4>
+                      </button></a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+{#                Add New Asset#}
+               <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-4">
+                <div class="card h-55">
+                  <div class="card-body">
+                    <div class="d-flex d-sm-block justify-content-between">
+                      <div class="border-bottom-sm mb-sm-4">
+                        <div class="d-flex align-items-center">
+                        </div>
+                          <a href="{% url 'newasset' %}"<button  type="button" class="btn btn-outline-info" >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                  <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/>
+                                </svg>
+                              <h4>Add New Asset</h4>
+                      </button></a>
+                      </div>
+
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+{#                Libraries I'm following#}
+              <div class="col-md-4 col-xl-6 col-xxl-4 gy-5 gy-md-3">
+                <div class="border-bottom">
+                  <h5 class="pb-4 border-bottom">Libraries I'm following</h5>
+
+                        {% for library in followed_libraries %}
+
+
+                          <li>
+                           {% if library.id %}
+                           <a href="{% url 'library_detail' library.id %}">{{ library.name }}</a>
+{#                                {% if user.is_authenticated %}#}
+{#                              {% if request.user in LibraryProfile.followers.all %}#}
+{#                                <a href="{% url 'unfollow_library' LibraryProfile.id %}">Unfollow</a>#}
+{#                              {% else %}#}
+{#                                <a href="{% url 'follow_library' LibraryProfile.id %}">Follow</a>#}
+{#                              {% endif %}#}
+{#                             {% endif %}#}
+                             {% else %}
+                               <h4> No Libraries </h4>
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+
+                              <!-- Pagination Controls -->
+                          <div class="pagination">
+                            <span class="step-links">
+                                {% if page_obj.has_previous %}
+                                    <a href="?page=1">&laquo; first</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                </span>
+
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                {% endif %}
+                            </span>
+                          </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+                 {#    2nd ROW OF CONTENT AND IMPORTANT NUMBERS#}
+          <div class="content">
+        <div class="row gy-3 mb-4 justify-content-between">
+          <div class="col-xxl-6">
+
+            <div class="row g-3 mb-3">
+              <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-4">
+                <div class="card h-55">
+                  <div class="card-body">
+                    <div class="d-flex d-sm-block justify-content-between">
+                      <div class="border-bottom-sm mb-sm-4">
+                          <div class="d-flex align-items-center"></div>
+{#create new Library#}
+
+                       <a href="{% url 'new_library' %}" <button type="button" class="btn btn-outline-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-building-fill-add" viewBox="0 0 16 16">
+                              <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
+                              <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7.256A4.493 4.493 0 0 0 12.5 8a4.493 4.493 0 0 0-3.59 1.787A.498.498 0 0 0 9 9.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .39-.187A4.476 4.476 0 0 0 8.027 12H6.5a.5.5 0 0 0-.5.5V16H3a1 1 0 0 1-1-1zm2 1.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3 0v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                            </svg>
+                            <h4>Create New Library</h4>
+                      </button></a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+{#                Add New Asset#}
+               <div class="col-sm-6 col-md-4 col-xl-3 col-xxl-4">
+                <div class="card h-55">
+                  <div class="card-body">
+                    <div class="d-flex d-sm-block justify-content-between">
+                      <div class="border-bottom-sm mb-sm-4">
+                        <div class="d-flex align-items-center">
+                        </div>
+                          <a href="{% url 'newasset' %}"<button  type="button" class="btn btn-outline-info" >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                  <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/>
+                                </svg>
+                              <h4>Add New Asset</h4>
+                      </button></a>
+                      </div>
+
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+{#                Libraries I'm following#}
+              <div class="col-md-4 col-xl-6 col-xxl-4 gy-5 gy-md-3">
+                <div class="border-bottom">
+                  <h5 class="pb-4 border-bottom">My Libraries</h5>
+
+                        {% for library in followed_libraries %}
+
+
+                          <li>
+                           {% if library.id %}
+                           <a href="{% url 'library_detail' library.id %}">{{ library.name }}</a>
+{#                                {% if user.is_authenticated %}#}
+{#                              {% if request.user in LibraryProfile.followers.all %}#}
+{#                                <a href="{% url 'unfollow_library' LibraryProfile.id %}">Unfollow</a>#}
+{#                              {% else %}#}
+{#                                <a href="{% url 'follow_library' LibraryProfile.id %}">Follow</a>#}
+{#                              {% endif %}#}
+{#                             {% endif %}#}
+                             {% else %}
+                               <h4> No Libraries </h4>
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+
+                              <!-- Pagination Controls -->
+                          <div class="pagination">
+                            <span class="step-links">
+                                {% if page_obj.has_previous %}
+                                    <a href="?page=1">&laquo; first</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                </span>
+
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                {% endif %}
+                            </span>
+                          </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+{#    map stuff #}
+{#        <div class="mx-lg-n4">#}
+{#          <div class="row g-3 mb-9 mt-n7">#}
+{#            <div class="col-xl-5">#}
+{#              <div class="card h-100">#}
+{#                <div class="card-body">#}
+{#                  <h3>Library Map</h3>#}
+{#                  <p class="text-700 mb-0">My Libraries</p>#}
+{##}
+{#                    <div id="mapid" style="height: 400px;"></div>#}
+{#                        <script>#}
+{#                             var map = L.map('mapid').setView([41.8781, -87.6298], 13); // Coordinates for Chicago#}
+{##}
+{#                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {#}
+{#                            maxZoom: 19,#}
+{#                             attribution: '© OpenStreetMap contributors'#}
+{#                              }).addTo(map);#}
+{##}
+{#                              // Add more map features like markers, popups, etc., as needed#}
+{##}
+{#                                 var marker = L.marker([41.8781, -87.6298]).addTo(map); // Example marker at Chicago#}
+{#                             marker.bindPopup("<b>Chicago Library</b>").openPopup();#}
+{#                            </script>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+
+{#ASSET MANAGEMENT TABLE#}
+{##}
+{#            <h4 class="mt-4 mb-3">My Shared Assets</h4>#}
+{#            <div class="border-top border-bottom-0 border-300" id="dealForecastTable" data-list='{"valueNames":["contact","appointment","qualified","closed-won","contact-sent"],"page":5}'>#}
+{#              <div class="table-responsive scrollbar">#}
+{#                <table class="table fs--1 mb-0">#}
+{#                  <thead>#}
+{#                    <tr>#}
+{#                      <th class="sort border-end white-space-nowrap align-middle ps-0 text-uppercase text-700" scope="col" data-sort="contact" style="width:15%; min-width:100px">Name</th>#}
+{#                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="appointment" style="width:15%; min-width:95px">#}
+{#                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-primary me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Description</span></div>#}
+{#                      </th>#}
+{#                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="qualified" style="width:20%; min-width:100px">#}
+{#                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-primary-300 me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Availability</span></div>#}
+{#                      </th>#}
+{#                      <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="closed-won" style="width:20%; min-width:100px">#}
+{#                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-success me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Checked Out By:</span></div>#}
+{#                      </th>#}
+{#                      <th class="sort align-middle text-end ps-3 text-uppercase text-700" scope="col" data-sort="contact-sent" style="width:20%; min-width:100px">#}
+{#                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-info me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">Number of Times Checked Out</span></div>#}
+{#                      </th>#}
+{#                    </tr>#}
+{#                  </thead>#}
+{#                  <tbody class="list" id="table-deal-forecast-body">#}
+{#                  {% for asset in page_obj %}#}
+{#                    <tr class="hover-actions-trigger btn-reveal-trigger position-static">#}
+{#                      <td class="contact border-end align-middle white-space-nowrap py-2 ps-0 px-3"><a class="fw-semi-bold" href="#!">{{ asset.Name}}</a></td>#}
+{#                      <td class="appointment border-end align-middle white-space-nowrap text-end fw-semi-bold text-900 py-2 px-3">{{ asset.description }}</td>#}
+{#                      <td class="qualified border-end align-middle white-space-nowrap text-end fw-semi-bold text-900 py-2 px-3">#}
+{#                          {% if asset.checkedout %} <a href="" class= "btn btn-danger disabled">Checked Out</a>#}
+{#                            {% elif request.user.is_authenticated and request.user in asset.requested_by.all %}</td>#}
+{##}
+{#                                    <form action="{% url 'toggle_request_asset' asset.id library.id %}" method="post">#}
+{#                                        {% csrf_token %}#}
+{#                                        <button type="submit" class="btn btn-warning">Remove from Cart</button>#}
+{#                                    </form>#}
+{#                                {% else %}#}
+{#                                    <form action="{% url 'toggle_request_asset' asset.id library.id %}" method="post">#}
+{#                                        {% csrf_token %}#}
+{#                                        <button type="submit" class="btn btn-info">Request Item</button>#}
+{#                                    </form>#}
+{##}
+{#                            {% endif %}#}
+{#                        <th class="sort border-end align-middle text-end px-3 text-uppercase text-700" scope="col" data-sort="closed-won" style="width:20%; min-width:100px">#}
+{#                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-success me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">{{ asset.checked_out_by }}:</span></div>#}
+{#                      </th>#}
+{#                      <th class="sort align-middle text-end ps-3 text-uppercase text-700" scope="col" data-sort="contact-sent" style="width:20%; min-width:100px">#}
+{#                        <div class="d-inline-flex flex-center"><span class="fa-solid fa-square fs--3 text-info me-2" data-fa-transform="up-2"></span><span class="mb-0 fs--1">{{ AssetRequest}}</span></div>#}
+{#                      </th>#}
+{#                    </tr>#}
+{#                  {% endfor %}#}
+{#                </table>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+
+
+
+                    {% else %}
+                            {% load crispy_forms_tags %}
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                <img class="mb-4" src="media/liblogo.png" alt="" width="200" height="200">
+                                <h1 class="h3 mb-3 fw-normal"> Hello, {{ user.username|default:'Guest' }}! </h1>
+                                 <h2> and welcome to Liblib</h2>
+                                         <a class="btn btn-dark" type="button" href="{% url 'login' %}">Log in</a>
+                                    <a class="btn btn-dark" type="button" href="{% url 'register' %}">Create New Account</a>
+                                    </div>
+                        {% endif %}
+
+
+
+
 {% endblock %}
 </body>
 </html>

@@ -1,34 +1,73 @@
 {% extends "base.html" %}  <!-- Extend your base layout -->
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% block content %}
   <h1>{{ library.name }}</h1>
   <p>{{ library.description }}</p>
+{#Library Cart Info: the following displays  the number of #}
+{#    assets requested and a list of the assets requested with a button to check the items out#}
 
 
       <div class="container">
     <h2>Assets</h2>
     <div class="row">
 
-<nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  Button with data-bs-target
+
+     <div class="col-12">
+    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  <i class="bi bi-cart3"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+  <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+</svg></i>
+
 </button>
+     </div>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">User Cart</h5>
+      <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+          <h2>Requested Assets</h2>
+<p>Number of items requested: {{ user_requested_assets.count }}</p>
+<ul>
+    {% for asset in user_requested_assets %}
+        <li>{{ asset.Name }}</li>
+    {% empty %}
+        <li>No assets requested.</li>
+    {% endfor %}
+</ul>
+{#    Checked out Items from the user#}
+    <h2>Checked Out Assets</h2>
+<p>Number of items checked out: {{ user_checked_out_assets.count }}</p>
+<ul>
+    {% for asset in user_checked_out_assets %}
+        <li>{{ asset.Name }}</li>
+    {% empty %}
+        <li>No assets checked out.</li>
+    {% endfor %}
+</ul>
+
+{% if user_requested_assets %}
+    <form action="{% url 'checkout_requested_assets' %}" method="post">
+        {% csrf_token %}
+         <input type="hidden" name="libraryprofile_id" value="{{ library.id }}">
+        <button type="submit">Check Out Requested Items</button>
+    </form>
+{% endif %}
+{#    Error Message#}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
     </div>
     <div class="dropdown mt-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
@@ -50,20 +89,38 @@
     <p class="card-text">{{ asset.description }}</p>
     <a href="{% url 'asset_detail' asset.id %}" class="btn btn-primary">Details</a>
       {% if asset.checkedout %}
-            <a href="" class= "btn btn-danger" disabled>checked out</a>
-      {% endif %}
+            <a href="" class= "btn btn-danger disabled">checked out</a>
+
+
+
+              {% elif request.user.is_authenticated %}
+            {% if request.user in asset.requested_by.all %}
+                <form action="{% url 'toggle_request_asset' asset.id library.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning">Remove from Cart</button>
+                </form>
+            {% else %}
+                <form action="{% url 'toggle_request_asset' asset.id library.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info">Request Item</button>
+                </form>
+            {% endif %}
+        {% endif %}
+
+  </li>
   </div>
 
-
+ </div>
               <!-- other asset details -->
-
-
-        </div>
       {% empty %}
+
         <p>No assets available.</p>
+
       {% endfor %}
-    </div>
-  </div>
+
+
+
+
 
       <!-- Pagination Controls -->
   <div class="pagination">

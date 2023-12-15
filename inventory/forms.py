@@ -5,7 +5,7 @@ from inventory.models import Asset
 class newassetform(ModelForm):
      class Meta:
           model = Asset
-          fields = "Name", "Brand","quantity", "serial", "assettag", "description", "keywords", "condition", "pricepaid", "care", "image", "StreetAddress", "City", "State", "areacode", "checkedout","notes"
+          fields = "Name", "Brand","quantity", "serial", "assettag", "description", "keywords", "condition", "pricepaid", "care", "image", "StreetAddress", "City", "State", "areacode", "checkedout","notes","libraries"
 
 
 
