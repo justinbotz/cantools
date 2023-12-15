@@ -24,7 +24,7 @@ class Asset(models.Model):
     condition =models.CharField(max_length=1, choices=CONDITION)
     pricepaid = models.DecimalField(max_digits=100, decimal_places=2, null=True, blank=True)
     care =models.TextField(blank=True, null=True)
-    image=models.ImageField(null= True,blank=True,upload_to='images/assets/<int:asset_id>')
+    image=models.ImageField(null= True,blank=True,upload_to='images/assets/')
     StreetAddress = models.CharField(max_length=255, null=True, blank=True)
     City = models.CharField(max_length=50, null=True, blank=True)
     State = models.CharField(max_length=50, null=True, blank=True)
